@@ -44,4 +44,7 @@ public class Employee {
         this.name = name;
         this.gender = gender;
     }
+
+    public Employee() {
+    }
 }

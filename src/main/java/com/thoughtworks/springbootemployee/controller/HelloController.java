@@ -17,4 +17,10 @@ public class HelloController {
     public List<Employee> getAll() {
         return employees;
     }
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Employee addEmployee(@RequestBody Employee employee){
+        employees.add(employee);
+        return employee;
+    }
 }
