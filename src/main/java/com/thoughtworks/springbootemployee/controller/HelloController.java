@@ -23,4 +23,16 @@ public class HelloController {
         employees.add(employee);
         return employee;
     }
+    @PutMapping("/{employeeId}")
+    @ResponseStatus(HttpStatus.OK)
+    public Employee modifyEmployee(@PathVariable Integer employeeId, @RequestBody Employee employee){
+        employees.forEach(employee1 -> {
+            if(employee1.getId().equals(employeeId)){
+                employee1.setAge(employee.getAge());
+                employee1.setGender(employee.getGender());
+                employee1.setName(employee.getName());
+            }
+        });
+        return  employee;
+    }
 }
