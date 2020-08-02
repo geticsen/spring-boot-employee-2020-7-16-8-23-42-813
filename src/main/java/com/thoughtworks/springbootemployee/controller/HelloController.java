@@ -6,10 +6,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 @RestController
 @RequestMapping("/employees")
 public class HelloController {
+    public static final String SUCCESS = "Success";
+    public static final String FAIL = "Fail";
     private List<Employee> employees = new ArrayList<>();
 
     @GetMapping
@@ -34,5 +37,18 @@ public class HelloController {
             }
         });
         return  employee;
+    }
+    @DeleteMapping("/{employeeId}")
+    @ResponseStatus(HttpStatus.OK)
+    public String  deleteEmployee(@PathVariable Integer employeeId){
+        Employee employee = null;
+        for (int i = 0; i < employees.size(); i++) {
+            if(employees.get(i).getId().equals(employeeId)){
+                employee = employees.get(i);
+                break;
+            }
+        }
+        employees.remove(employee);
+        return SUCCESS;
     }
 }
